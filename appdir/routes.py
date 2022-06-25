@@ -5,25 +5,31 @@ import appdir.models
 import time
 
 
-@app.route('/', methods=['GET', 'POST', 'PUT', 'DELETE'])
-@app.route("/data", methods=['GET', 'POST', 'PUT', 'DELETE'])
+@app.route('/', methods=['GET','POST'])
+@app.route("/data", methods=['GET','POST'])
 def data():
-    if request.method == 'POST':
-        NodeID = request.args.get('NodeID')
-        pm1 = request.args.get('tpluviometer1')
-        pm2 = request.args.get('tpluviometer2')
-        pm3 = request.args.get('tpluviometer3')
-        am = request.args.get('tanemometer')
-        vane_str = request.args.get('twd')
-        sm = request.args.get('tSoil_moist')
-        temp = request.args.get('ttemp')
-        humd = request.args.get('thumd')
-        pres = request.args.get('tpres')
-        lum = request.args.get('tLuminosity')
-        bat = request.args.get('tbat')
-        timex = request.args.get('ttime')
-        sensordata = appdir.models.SensorData(NodeID=NodeID, tpluviometer1=pm1, tpluviometer2=pm2, tpluviometer3=pm3, tanemometer=am, twd=vane_str, tSoil_moist=sm, ttemp=temp, thumd=humd, tpres=pres, tLuminosity=lum, tbat=bat, ttime=timex)
-        db.session.add(sensordata)
-        db.session.commit()
-    sensor = appdir.models.SensorData.query.order_by(appdir.models.SensorData.ttime.desc()).all()
-    return render_template('data_.html', sensor=sensor)
+    NodeID = request.args.get('NodeID')
+    pm1 = request.args.get('tpluviometer1')
+    pm2 = request.args.get('tpluviometer2')
+    pm3 = request.args.get('tpluviometer3')
+    am = request.args.get('tanemometer')
+    vane_str = request.args.get('twd')
+    sm = request.args.get('tSoil_moist')
+    temp = request.args.get('ttemp')
+    humd = request.args.get('thumd')
+    pres = request.args.get('tpres')
+    lum = request.args.get('tLuminosity')
+    bat = request.args.get('tbat')
+    timex = request.args.get('ttime')
+    sensordata = appdir.models.SensorData(NodeID=NodeID, tpluviometer1=pm1, tpluviometer2=pm2, tpluviometer3=pm3, tanemometer=am, twd=vane_str, tSoil_moist=sm, ttemp=temp, thumd=humd, tpres=pres, tLuminosity=lum, tbat=bat, ttime=timex)
+    db.session.add(sensordata)
+    db.session.commit()
+    sensors = appdir.models.SensorData.query.all()
+    return render_template('data_.html', sensors=sensors)
+
+
+@app.route("/data_")
+def data_():
+    sensors = appdir.models.SensorData.query.all()
+    return render_template('data_.html', sensors=sensors)
+

@@ -10,4 +10,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'si
 
 db = SQLAlchemy(app)
 
+
+def split_func(strn):
+    t = f'{strn}'
+    return t.split()
+
+
+app.jinja_env.globals.update(split_func=split_func)
+
 from appdir import routes

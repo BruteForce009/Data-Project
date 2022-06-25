@@ -10,6 +10,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
+#bold_em {
+  font-weight: bold;
+}
+
 #success-box, #fail-box {
     display: flex;
     /* justify-content: center;
@@ -45,14 +49,11 @@ tr:hover {
   background-color: #D6EEEE;
 }
 
-#sensor-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 15px 15px;
+.sensor-card {
   padding: 5px 5px;
   font-family: "Moncao" ,monospace;
   font-size: 16px;
+  text-align: center;
 }
 
 li, a, button {
