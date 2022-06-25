@@ -9,18 +9,6 @@
     <!-- <link rel="stylesheet" href="../static/css/style.css"> -->
 </head>
 <body>
-<header>
-    <nav>
-        <ul class="nav-links">
-            {% if current_user.is_authenticated %}
-                <li><a class="nav-item nav-link" href="{{ url_for('logout') }}"><button id="out-btn">Logout</button></a></li>
-            {% else %}
-                <li><a href="{{ url_for('login')}}"><button id="log-btn">Login</button></a></li>
-                <li><a href="{{ url_for('register')}}"><button id="sign-btn">Register</button></a></li>
-            {% endif %}
-        </ul>
-    </nav>
-</header>
 {% block main %}
 {% endblock main %}
 
