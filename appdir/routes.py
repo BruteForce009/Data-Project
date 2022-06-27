@@ -1,12 +1,18 @@
 from flask import render_template, url_for, flash, redirect, get_flashed_messages, request
 from appdir import app, db
 import appdir.models
+import appdir.forms
 import json
-# from appdir.models import User
 import time
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
+@app.route("/data_")
+def data_():
+    sensors = appdir.models.SensorData.query.all()
+    return render_template('data_.html', sensors=sensors)
+
+
 @app.route("/data", methods=['GET', 'POST'])
 def data():
     NodeID = request.args.get('NodeID')
@@ -61,9 +67,3 @@ def jsondata():
     db.session.commit()
     sensors = appdir.models.SensorData.query.all()
     return render_template('data_.html', sensors=sensors)
-
-@app.route("/data_")
-def data_():
-    sensors = appdir.models.SensorData.query.all()
-    return render_template('data_.html', sensors=sensors)
-
